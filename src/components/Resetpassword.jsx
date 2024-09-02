@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import './App.css'
 
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 
@@ -25,7 +26,7 @@ function Resetpassword() {
         e.preventDefault()
         setLoading(true)
         try {
-            let res = await AxiosService.post(`https://passwordresetbackend-3ifu.onrender.com/user/reset-password/${randomString}/${expirationTimestamp}`,{
+            let res = await axios.post(`https://passwordresetbackend-3ifu.onrender.com/user/reset-password/${randomString}/${expirationTimestamp}`,{
                 newPassword:password
             })
 

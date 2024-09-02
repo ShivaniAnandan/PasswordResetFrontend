@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {toast} from 'react-toastify'
 import "./App.css";
+import axios from "axios";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +23,7 @@ function Signup() {
     e.preventDefault()
     setLoading(true)
     try {
-      let res = await AxiosService.post('https://passwordresetbackend-3ifu.onrender.com/user/signup',{
+      let res = await axios.post('https://passwordresetbackend-3ifu.onrender.com/user/signup',{
         userName,
         email,
         password
