@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import icon from "../images/icon.png";
 import { useNavigate } from "react-router-dom";
-import AxiosService from "../common/ApiService";
+
 import {toast} from 'react-toastify'
 import "./App.css";
 
@@ -22,7 +22,7 @@ function Signup() {
     e.preventDefault()
     setLoading(true)
     try {
-      let res = await AxiosService.post('/user/signup',{
+      let res = await AxiosService.post('https://passwordresetbackend-3ifu.onrender.com/user/signup',{
         userName,
         email,
         password

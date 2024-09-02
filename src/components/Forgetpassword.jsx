@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import icon from '../images/icon.png'
 import { useNavigate } from 'react-router-dom'
 import './App.css'
-import AxiosService from '../common/ApiService'
+
 import { toast } from 'react-toastify'
 
 
@@ -16,7 +16,7 @@ const forgetpassword = async(e)=>{
     e.preventDefault()
     setLoading(true)
     try {
-        let res = await AxiosService.post('/user/forget-password',{
+        let res = await AxiosService.post('https://passwordresetbackend-3ifu.onrender.com/user/forget-password',{
             email
         })
         if(res.status==201)

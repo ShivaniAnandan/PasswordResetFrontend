@@ -3,7 +3,7 @@ import icon from '../images/icon.png'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import './App.css'
-import AxiosService from '../common/ApiService';
+
 import { toast } from 'react-toastify';
 
 
@@ -25,7 +25,7 @@ function Resetpassword() {
         e.preventDefault()
         setLoading(true)
         try {
-            let res = await AxiosService.post(`/user/reset-password/${randomString}/${expirationTimestamp}`,{
+            let res = await AxiosService.post(`https://passwordresetbackend-3ifu.onrender.com/user/reset-password/${randomString}/${expirationTimestamp}`,{
                 newPassword:password
             })
 

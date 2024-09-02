@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import icon from '../images/icon.png';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import AxiosService from '../common/ApiService';
+
 import { toast } from 'react-toastify';
 
 function Login() {
@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault()
     setLoading(true)
     try {
-      let res = await AxiosService.post('/user/login',{
+      let res = await AxiosService.post('https://passwordresetbackend-3ifu.onrender.com/user/login',{
         email,
         password
       })
