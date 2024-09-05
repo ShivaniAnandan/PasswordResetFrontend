@@ -27,13 +27,20 @@ function Login() {
         email,
         password
       })
-      if(res.status==201){
-       toast.success("Login successfully")
+      // if(res.status==201){
+      //  toast.success("Login successfully")
        
-       sessionStorage.setItem("userName",res.data.user.userName)
-       sessionStorage.setItem('email',res.data.user.email)
-       navigate('/dashboard')
-      }
+      //  sessionStorage.setItem("userName",res.data.user.userName)
+      //  sessionStorage.setItem('email',res.data.user.email)
+      //  navigate('/dashboard')
+      // }
+      if (response.status === 200) {
+        toast.success("Login successfully")
+        const { token, user } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/dashboard');
+    }
     } catch (error) {
       console.log(error)
       toast.error("Incorrct email or password")
