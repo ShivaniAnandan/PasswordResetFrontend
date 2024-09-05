@@ -34,7 +34,7 @@ function Login() {
       //  sessionStorage.setItem('email',res.data.user.email)
       //  navigate('/dashboard')
       // }
-      if (response.status === 200) {
+      if (res.status === 200) {
         toast.success("Login successfully")
         const { token, user } = response.data;
         localStorage.setItem('token', token);
