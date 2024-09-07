@@ -103,7 +103,6 @@ function Dashboard() {
 
   useEffect(() => {
     const userString = localStorage.getItem("userName");
-    console.log(userString);
     if (userString) {
       try {
         const user = JSON.parse(userString);
