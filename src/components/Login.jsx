@@ -28,7 +28,6 @@ function Login() {
         password
       })
       if (res.status === 201) {
-        console.log(res.data);
         toast.success("Login successfully")
         const { token, user } = res.data;
         localStorage.setItem('token', token);
