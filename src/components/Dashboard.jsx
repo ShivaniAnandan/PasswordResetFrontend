@@ -1,9 +1,10 @@
-import React, { useEffect, useRef,useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useLogout from '../hooks/useLogout.jsx';
 
-
 function Dashboard() {
- const logout = useLogout()
+  const logout = useLogout();
+  const navigate = useNavigate();
   const ParticleCanvas = () => {
     const canvasRef = useRef(null);
     let w, h, ctx, rate, arc, time, count, size, speed, parts, colors, mouse;
@@ -47,7 +48,7 @@ function Dashboard() {
 
         for (let i = 0; i < arc; i++) {
           const li = parts[i];
-          const distanceFactor = DistanceBetween(mouse, parts[i]);
+          const distanceFactor = DistanceBetween(mouse, li);
           const distance = Math.max(Math.min(15 - distanceFactor / 10, 10), 1);
           ctx.beginPath();
           ctx.arc(li.x, li.y, li.size * distance, 0, Math.PI * 2, false);
@@ -56,8 +57,8 @@ function Dashboard() {
           if (i % 2 === 0) ctx.stroke();
           else ctx.fill();
 
-          li.x = li.x + li.toX * (time * 0.05);
-          li.y = li.y + li.toY * (time * 0.05);
+          li.x += li.toX * (time * 0.05);
+          li.y += li.toY * (time * 0.05);
 
           if (li.x > w) li.x = 0;
           if (li.y > h) li.y = 0;
@@ -91,55 +92,51 @@ function Dashboard() {
 
       return () => {
         window.removeEventListener('resize', resizeCanvas);
+        canvas.removeEventListener('mousemove', handleMouseMove);
       };
     }, []);
 
     return <canvas ref={canvasRef} />;
   };
 
+  const [userName, setUserName] = useState("");
 
-  const [userName,setUserName]=useState("")
-
-  useEffect(()=>{
-    let userName = sessionStorage.getItem("userName")
-    if(userName)
-    {
-      setUserName(userName)
+  useEffect(() => {
+    const userString = localStorage.getItem("userName");
+    console.log(userString);
+    if (userString) {
+      try {
+        const user = JSON.parse(userString);
+        setUserName(user);
+      } catch (error) {
+        console.error("Failed to parse user data:", error);
+        navigate('/login');
+      }
+    } else {
+      navigate('/login');
     }
-  },[])
-
+  }, [navigate]);
 
   return (
     <>
-    
-      <ParticleCanvas  />
-      
-   
-      
-      <div className="sign " id='sign' style={{paddingBottom:"180px"}} >
-      <div className='wel'>
-       WELCOME
-    </div>
-    <br/>
-      <br/>
-      <br/>
-      <div style={{ position:'absolute', marginTop:"300px" }}>
-  <span className="fast-flicker"></span><span  className="flicker">{userName}</span>
-  <br />
-  </div>
-  
-  <button id='log' style={{ position:'absolute', marginTop:"500px" }}>
-  <span onClick={logout} >LOGOUT</span>
-</button>
+      <ParticleCanvas />
+      <div className="sign" id='sign' style={{ paddingBottom: "180px" }}>
+        <div className='wel'>
+          WELCOME
+        </div>
+        <br />
+        <br />
+        <br />
+        <div style={{ position: 'absolute', marginTop: "300px" }}>
+          <span className="fast-flicker"></span><span className="flicker">{userName}</span>
+          <br />
+        </div>
 
-
-
-  
-</div>
-
-
-   
-</>
+        <button id='log' style={{ position: 'absolute', marginTop: "500px" }}>
+          <span onClick={logout}>LOGOUT</span>
+        </button>
+      </div>
+    </>
   );
 }
 
