@@ -27,19 +27,12 @@ function Login() {
         email,
         password
       })
-      // if(res.status==201){
-      //  toast.success("Login successfully")
-       
-      //  sessionStorage.setItem("userName",res.data.user.userName)
-      //  sessionStorage.setItem('email',res.data.user.email)
-      //  navigate('/dashboard')
-      // }
       if (res.status === 201) {
         console.log(res.data);
         toast.success("Login successfully")
         const { token, user } = res.data;
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('userName', JSON.stringify(user.userName));
         navigate('/dashboard');
     }
     } catch (error) {
