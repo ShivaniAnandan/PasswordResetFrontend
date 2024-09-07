@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard.jsx'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Forgetpassword from './components/Forgetpassword'
 import Resetpassword from './components/Resetpassword'
-import ProtectedRoute from './components/ProtecttedRoute.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 function App() {
   return (
