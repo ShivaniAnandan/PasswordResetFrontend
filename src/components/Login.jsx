@@ -62,7 +62,7 @@ function Login() {
         <form className="login-form">
           <div className="textbox">
             <input type="email" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} />
-            <span className="material-symbols-outlined"> email </span>
+            <span className="material-icons-outlined"> email </span>
           </div>
 
           <div className="textbox">
@@ -70,7 +70,7 @@ function Login() {
               type={showPassword ? 'text' : 'password'} // Here is the change
               placeholder="Password" onChange={(e)=>setPassword(e.target.value)}
             />
-            <span  className="material-symbols-outlined">
+            <span  className="material-icons-outlined">
               {' '}
               lock{' '}
             </span>
